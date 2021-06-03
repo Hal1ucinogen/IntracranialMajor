@@ -18,7 +18,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -43,9 +42,9 @@ import com.naughtyenigma.intracranialmajor.model.User
 import com.naughtyenigma.intracranialmajor.model.matches
 import com.naughtyenigma.intracranialmajor.model.userSample
 import com.naughtyenigma.intracranialmajor.ui.component.AvatarImage
+import com.naughtyenigma.intracranialmajor.ui.component.IMSurface
 import com.naughtyenigma.intracranialmajor.ui.component.IntracranialMajorDivider
-import com.naughtyenigma.intracranialmajor.ui.theme.Ocean3
-import com.naughtyenigma.intracranialmajor.ui.theme.Shadow4
+import com.naughtyenigma.intracranialmajor.ui.theme.IMTheme
 import kotlin.math.max
 import kotlin.math.min
 
@@ -78,11 +77,7 @@ private fun Header() {
         modifier = Modifier
             .height(280.dp)
             .fillMaxWidth()
-            .background(
-                Brush.horizontalGradient(
-                    listOf(Shadow4, Ocean3)
-                )
-            )
+            .background(Brush.horizontalGradient(IMTheme.colors.tornado1))
     )
 }
 
@@ -102,7 +97,7 @@ private fun Body(
             modifier = Modifier.verticalScroll(scroll)
         ) {
             Spacer(Modifier.height(GradientScroll))
-            Surface(modifier = Modifier.fillMaxSize()) {
+            IMSurface(modifier = Modifier.fillMaxSize()) {
                 Column {
                     Spacer(Modifier.height(ImageOverlap))
                     Spacer(Modifier.height(TitleHeight))
@@ -152,7 +147,7 @@ private fun MatchItem(
         Text(
             text = match.heroName,
             style = MaterialTheme.typography.subtitle1,
-            color = MaterialTheme.colors.primary,
+            color = IMTheme.colors.textSecondary,
             modifier = Modifier.constrainAs(heroName) {
                 linkTo(
                     start = heroAvatar.end,
@@ -166,7 +161,7 @@ private fun MatchItem(
         Text(
             text = match.kda,
             style = MaterialTheme.typography.body1,
-            color = MaterialTheme.colors.onSecondary,
+            color = IMTheme.colors.textHelp,
             modifier = Modifier.constrainAs(kda) {
                 linkTo(
                     start = heroAvatar.end,
@@ -187,7 +182,7 @@ private fun MatchItem(
         Text(
             text = match.integral,
             style = MaterialTheme.typography.subtitle1,
-            color = MaterialTheme.colors.onSecondary,
+            color = IMTheme.colors.textPrimary,
             modifier = Modifier.constrainAs(mmr) {
                 top.linkTo(parent.top, margin = 16.dp)
                 bottom.linkTo(parent.bottom, margin = 16.dp)
@@ -225,27 +220,27 @@ private fun Title(user: User, scroll: Int) {
             .heightIn(min = TitleHeight)
             .statusBarsPadding()
             .graphicsLayer { translationY = offset }
-            .background(color = MaterialTheme.colors.background)
+            .background(color = IMTheme.colors.uiBackground)
     ) {
         Spacer(Modifier.height(16.dp))
         Text(
             text = user.nickName,
             style = MaterialTheme.typography.h4,
-            color = MaterialTheme.colors.onSurface,
+            color = IMTheme.colors.textSecondary,
             modifier = HzPadding
         )
         Text(
             text = "MMR - ${user.integral}",
             style = MaterialTheme.typography.subtitle2,
             fontSize = 20.sp,
-            color = MaterialTheme.colors.onSecondary,
+            color = IMTheme.colors.textHelp,
             modifier = HzPadding
         )
         Spacer(Modifier.height(4.dp))
         Text(
             text = "Rank - ${user.rank}",
             style = MaterialTheme.typography.h6,
-            color = MaterialTheme.colors.primary,
+            color = IMTheme.colors.textPrimary,
             modifier = HzPadding
         )
         Spacer(Modifier.height(8.dp))
