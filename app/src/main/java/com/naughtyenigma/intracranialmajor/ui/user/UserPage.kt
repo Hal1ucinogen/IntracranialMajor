@@ -60,7 +60,7 @@ private val CollapsedImageSize = 150.dp
 private val HzPadding = Modifier.padding(horizontal = 24.dp)
 
 @Composable
-fun UserPage() {
+fun UserPage(modifier: Modifier = Modifier) {
     val user = remember { userSample }
     Box(modifier = Modifier.fillMaxSize()) {
         val scroll = rememberScrollState(0)

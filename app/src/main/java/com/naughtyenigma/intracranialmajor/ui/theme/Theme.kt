@@ -43,7 +43,7 @@ private val DarkColorPalette = IMColors(
 )
 
 private val LightColorPalette = IMColors(
-    brand = Shadow5,
+    brand = GreenGray,
     brandSecondary = Ocean3,
     uiBackground = Neutral0,
     uiBorder = Neutral4,
