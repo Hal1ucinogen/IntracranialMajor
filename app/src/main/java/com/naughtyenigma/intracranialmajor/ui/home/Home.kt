@@ -60,7 +60,6 @@ private val BottomNavIndicatorShape = RoundedCornerShape(percent = 50)
 private val BottomNavigationItemPadding = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
 
 
-
 enum class HomeSections(
     @StringRes val title: Int,
     val icon: ImageVector,
@@ -92,11 +91,7 @@ fun IMBottomBar(
                 itemCount = routes.size,
                 animSpec = springSpec,
                 indicator = { IMBottomNavIndicator() },
-                modifier = Modifier.navigationBarsPadding(
-                    bottom = true,
-                    left = false,
-                    right = false
-                )
+                modifier = Modifier.navigationBarsPadding(start = false, end = false)
             ) {
                 tabs.forEach { section ->
                     val selected = section == currentSection

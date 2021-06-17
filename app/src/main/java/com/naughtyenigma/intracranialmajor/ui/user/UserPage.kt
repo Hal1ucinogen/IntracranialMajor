@@ -108,7 +108,7 @@ private fun Body(
                     Spacer(
                         modifier = Modifier
                             .padding(bottom = BottomBarHeight)
-                            .navigationBarsPadding(left = false, right = false)
+                            .navigationBarsPadding(start = false, end = false)
                             .height(8.dp)
                     )
                 }
