@@ -9,7 +9,7 @@ import androidx.compose.ui.unit.dp
 import com.naughtyenigma.intracranialmajor.ui.theme.IMTheme
 
 @Composable
-fun IntracranialMajorDivider(
+fun IMDivider(
     modifier: Modifier = Modifier,
     color: Color = IMTheme.colors.uiBorder.copy(alpha = DividerAlpha),
     thickness: Dp = 1.dp,

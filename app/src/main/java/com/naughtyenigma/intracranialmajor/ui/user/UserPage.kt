@@ -43,7 +43,7 @@ import com.naughtyenigma.intracranialmajor.model.matches
 import com.naughtyenigma.intracranialmajor.model.userSample
 import com.naughtyenigma.intracranialmajor.ui.component.AvatarImage
 import com.naughtyenigma.intracranialmajor.ui.component.IMSurface
-import com.naughtyenigma.intracranialmajor.ui.component.IntracranialMajorDivider
+import com.naughtyenigma.intracranialmajor.ui.component.IMDivider
 import com.naughtyenigma.intracranialmajor.ui.theme.IMTheme
 import kotlin.math.max
 import kotlin.math.min
@@ -200,7 +200,7 @@ private fun MatchItem(
                     end.linkTo(parent.end)
                 }
         )
-        IntracranialMajorDivider(
+        IMDivider(
             Modifier.constrainAs(divider) {
                 linkTo(start = parent.start, end = parent.end)
                 top.linkTo(parent.bottom)
@@ -244,7 +244,7 @@ private fun Title(user: User, scroll: Int) {
             modifier = HzPadding
         )
         Spacer(Modifier.height(8.dp))
-        IntracranialMajorDivider()
+        IMDivider()
     }
 }
 
