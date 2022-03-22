@@ -50,13 +50,13 @@ import kotlin.math.min
 
 private val BottomBarHeight = 56.dp
 private val TitleHeight = 128.dp
-private val GradientScroll = 180.dp
+private val GradientScroll = 80.dp
 private val ImageOverlap = 115.dp
 private val MinTitleOffset = 56.dp
 private val MinImageOffset = 12.dp
 private val MaxTitleOffset = ImageOverlap + MinTitleOffset + GradientScroll
-private val ExpandedImageSize = 300.dp
-private val CollapsedImageSize = 150.dp
+private val ExpandedImageSize = 200.dp
+private val CollapsedImageSize = 100.dp
 private val HzPadding = Modifier.padding(horizontal = 24.dp)
 
 @Composable
@@ -75,7 +75,7 @@ fun UserPage(modifier: Modifier = Modifier) {
 private fun Header() {
     Spacer(
         modifier = Modifier
-            .height(280.dp)
+            .height(180.dp)
             .fillMaxWidth()
             .background(Brush.horizontalGradient(IMTheme.colors.tornado1))
     )

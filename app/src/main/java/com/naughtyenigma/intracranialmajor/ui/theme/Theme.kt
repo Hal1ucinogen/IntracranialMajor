@@ -63,7 +63,7 @@ private val LightColorPalette = IMColors(
     gradient2_1 = listOf(Shadow4, Shadow11),
     gradient2_2 = listOf(Ocean3, Shadow3),
     gradient2_3 = listOf(Lavender3, Rose2),
-    tornado1 = listOf(Shadow4, Ocean3),
+    tornado1 = listOf(GreenGray, PinkGray),
     isDark = false
 )
 
