@@ -1,26 +1,13 @@
 package com.naughtyenigma.intracranialmajor.ui.user
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.ScrollState
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.*
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.graphicsLayer
@@ -34,16 +21,14 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.lerp
 import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.google.accompanist.insets.navigationBarsPadding
 import com.google.accompanist.insets.statusBarsPadding
 import com.naughtyenigma.intracranialmajor.R
 import com.naughtyenigma.intracranialmajor.model.Match
-import com.naughtyenigma.intracranialmajor.model.User
-import com.naughtyenigma.intracranialmajor.model.matches
-import com.naughtyenigma.intracranialmajor.model.userSample
 import com.naughtyenigma.intracranialmajor.ui.component.AvatarImage
-import com.naughtyenigma.intracranialmajor.ui.component.IMSurface
 import com.naughtyenigma.intracranialmajor.ui.component.IMDivider
+import com.naughtyenigma.intracranialmajor.ui.component.IMSurface
 import com.naughtyenigma.intracranialmajor.ui.theme.IMTheme
 import kotlin.math.max
 import kotlin.math.min
@@ -61,13 +46,15 @@ private val HzPadding = Modifier.padding(horizontal = 24.dp)
 
 @Composable
 fun UserPage(modifier: Modifier = Modifier) {
-    val user = remember { userSample }
+    val viewModel: UserViewModel = viewModel()
+    val viewState by viewModel.state.collectAsState()
+//    val user = remember { userSample }
     Box(modifier = Modifier.fillMaxSize()) {
         val scroll = rememberScrollState(0)
         Header()
-        Body(matches, scroll)
-        Title(user, scroll.value)
-        Avatar(user.avatarUrl, scroll.value)
+        Body(viewState.recentMatches, scroll)
+        Title(viewState, scroll.value)
+        Avatar(viewState.avatar, scroll.value)
     }
 }
 
@@ -210,7 +197,7 @@ private fun MatchItem(
 }
 
 @Composable
-private fun Title(user: User, scroll: Int) {
+private fun Title(state: UserUiState, scroll: Int) {
     val maxOffset = with(LocalDensity.current) { MaxTitleOffset.toPx() }
     val minOffset = with(LocalDensity.current) { MinTitleOffset.toPx() }
     val offset = (maxOffset - scroll).coerceAtLeast(minOffset)
@@ -224,13 +211,13 @@ private fun Title(user: User, scroll: Int) {
     ) {
         Spacer(Modifier.height(16.dp))
         Text(
-            text = user.nickName,
+            text = state.name,
             style = MaterialTheme.typography.h4,
             color = IMTheme.colors.textSecondary,
             modifier = HzPadding
         )
         Text(
-            text = "MMR - ${user.integral}",
+            text = "MMR - ${state.score}",
             style = MaterialTheme.typography.subtitle2,
             fontSize = 20.sp,
             color = IMTheme.colors.textHelp,
@@ -238,7 +225,7 @@ private fun Title(user: User, scroll: Int) {
         )
         Spacer(Modifier.height(4.dp))
         Text(
-            text = "Rank - ${user.rank}",
+            text = "Rank - ${state.rank}",
             style = MaterialTheme.typography.h6,
             color = IMTheme.colors.textPrimary,
             modifier = HzPadding
